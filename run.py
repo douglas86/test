@@ -1,22 +1,16 @@
-import asyncio
-from openai import AsyncOpenAI
+from openai import OpenAI
+from utils.keys import OPENAI_API_KEY
 
-client = AsyncOpenAI(
-    # defaults to os.environ.get("OPENAI_API_KEY")
-    api_key="My API Key",
+client = OpenAI(
+    api_key=OPENAI_API_KEY
 )
 
+completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": "Can you provide general advice on managing stress and anxiety?"}
+    ]
 
-async def main() -> None:
-    chat_completion = await client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Say this is a test",
-            }
-        ],
-        model="gpt-3.5-turbo",
-    )
+)
 
-
-asyncio.run(main())
+print(completion.choices[0].message)

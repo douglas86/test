@@ -1,6 +1,6 @@
 console.log("hello");
 
-const ctx = document.getElementById("myChart");
+const ctx = document.getElementById("barChart");
 
 new Chart(ctx, {
   type: "bar",
